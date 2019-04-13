@@ -76,23 +76,18 @@ public class CourseService {
         Optional<User> curUser = userService.getUserWithAuthorities();
         Optional<Course> curCourse = courseRepository.findCourseByCourseName(courseName);
 
-        // System.out.println(curUser.get().id);
-// write a function to get user ID
-// write a function to get course ID
+        System.out.println(curUser.get().id);
 
-        Optional<UserCourse> OptionalExistingUserCourse = userCourseRepository.findUserCourse(curUser.get().id,curCourse.get().id);
-       
-        // Optional<UserCourse> OptionalExistingUserCourse = userCourseRepository.findUserCourse(curCourse.course_id,curUser.user_id);
+        // Optional<UserCourse> OptionalExistingUserCourse = userCourseRepository.findUserCourse(curUser.get().id,curCourse.get().id);
 
-
-         if(!OptionalExistingUserCourse.isPresent()){
-            throw new Exception("Course is not exist.");
-        }
-        try {
-            userCourseRepository.delete(OptionalExistingUserCourse.get());
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
+        //  if(!OptionalExistingUserCourse.isPresent()){
+        //     throw new Exception("Course is not exist.");
+        // }
+        // try {
+        //     userCourseRepository.delete(OptionalExistingUserCourse.get());
+        // } catch (Exception e){
+        //     throw new Exception(e.getMessage());
+        // }
     }
     
     public void addCourse(CourseDto course) throws Exception{
