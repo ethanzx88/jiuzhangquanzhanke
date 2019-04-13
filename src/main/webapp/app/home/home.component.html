@@ -51,6 +51,7 @@
                     <div>{{course.courseLocation}}</div>
                     <div>{{course.courseContent}}</div>
                     <div>{{course.teacherName}}</div>
+                    <button *jhiHasAnyAuthority="'ROLE_STUDENT'" (click)="unregisterCourse(course.courseName)">取消注册</button>
                 </div>
             </div>
         </div>

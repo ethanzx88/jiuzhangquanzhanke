@@ -71,6 +71,20 @@ public class CourseService {
         }
     }
 
+    public void unregisterCourse(String courseName) throws Exception{
+        Optional<User> curUser = userService.getUserWithAuthorities();
+        Optional<Course> curCourse = courseRepository.findCourseByCourseName(courseName);
+
+        if (curUser.isPresent() && curCourse.isPresent()){
+            userCourseRepository.delete(UserCourse.builder()
+                .user(curUser.get())
+                .course(curCourse.get())
+                .build());
+        } else {
+            throw new Exception("UnExpected Exception");
+        }
+    }
+    
     public void addCourse(CourseDto course) throws Exception{
         Optional<Course> courseDto = courseRepository.findCourseByCourseName(course.getCourseName());
 

@@ -54,6 +54,16 @@ public class CourseController {
         }
     }
 
+    @PostMapping(path = "/api/course/unregisterCourse/{courseName}", produces = "application/json")
+    public HttpStatus unregisterCourse(@NotNull @PathVariable("courseName") String courseName) {
+        try {
+            courseService.unregisterCourse(courseName);
+            return HttpStatus.OK;
+        } catch (Exception e) {
+            return HttpStatus.UNPROCESSABLE_ENTITY;
+        }
+    }
+
     @PostMapping(path = "/api/course/addCourse", produces = "application/json")
     public HttpStatus addCourse(@RequestBody @NotNull CourseDto course) {
         try {
