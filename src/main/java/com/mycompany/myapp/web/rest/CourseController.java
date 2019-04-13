@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.dto.CourseDto;
+import com.mycompany.myapp.domain.dto.CourseWithSNDto;
 import com.mycompany.myapp.domain.dto.CourseWithTNDto;
 import com.mycompany.myapp.service.CourseService;
 import io.swagger.annotations.Api;
@@ -37,8 +38,8 @@ public class CourseController {
     }
 
     @GetMapping(path = "/api/course/findAllCoursesWithTNDto", produces = "application/json")
-    public HttpEntity<List<CourseWithTNDto>> findAllCoursesWithTNDto(){
-        List<CourseWithTNDto> allCourses = courseService.findAllCoursesDtoWithTeacherNameFromDB();
+    public HttpEntity<List<CourseWithSNDto>> findAllCoursesWithTNDto(){
+        List<CourseWithSNDto> allCourses = courseService.findAllCoursesDtoWithTeacherNameFromDB();
 
         return new ResponseEntity<>(allCourses, HttpStatus.OK);
     }

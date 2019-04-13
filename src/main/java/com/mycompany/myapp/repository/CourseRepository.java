@@ -1,8 +1,10 @@
 package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.Course;
+import com.mycompany.myapp.domain.UserCourse;
 import com.mycompany.myapp.domain.dto.CourseDto;
 import com.mycompany.myapp.domain.dto.CourseWithTNDto;
+import com.mycompany.myapp.domain.dto.CourseWithSNDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,6 +24,9 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query("SELECT new com.mycompany.myapp.domain.dto.CourseWithTNDto(c.courseName, c.courseLocation, c.courseContent, u.login) from Course c left join User u on c.teacherId = u.id")
     List<CourseWithTNDto> findAllCoursesDtoWithTeacherName();
+
+    @Query("SELECT new com.mycompany.myapp.domain.dto.CourseWithSNDto(c.courseName, c.courseLocation, c.courseContent, u.firstName) from Course c join UserCourse uc on c.id = uc.course join User u on uc.user = u.id")
+    List<CourseWithSNDto> findAllCoursesDtoWithStudentName();
 
     Optional<Course> findCourseByCourseName(String courseName);
 

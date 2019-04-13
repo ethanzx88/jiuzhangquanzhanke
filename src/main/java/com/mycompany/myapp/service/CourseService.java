@@ -5,6 +5,7 @@ import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.domain.UserCourse;
 import com.mycompany.myapp.domain.dto.CourseDto;
 import com.mycompany.myapp.domain.dto.CourseWithTNDto;
+import com.mycompany.myapp.domain.dto.CourseWithSNDto;
 import com.mycompany.myapp.repository.CourseRepository;
 import com.mycompany.myapp.repository.UserCourseRepository;
 import org.checkerframework.checker.units.qual.A;
@@ -51,8 +52,8 @@ public class CourseService {
         return courseRepository.findAllCoursesDto();
     }
 
-    public List<CourseWithTNDto> findAllCoursesDtoWithTeacherNameFromDB(){
-        return courseRepository.findAllCoursesDtoWithTeacherName();
+    public List<CourseWithSNDto> findAllCoursesDtoWithTeacherNameFromDB(){
+        return courseRepository.findAllCoursesDtoWithStudentName();
     }
 
 

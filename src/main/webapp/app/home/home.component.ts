@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    getAllCoursesWithTN() {
+    getAllCoursesWithSN() {
         this.courseService.getCourseInfoWithTN().subscribe(curDto => {
             if (!curDto) {
                 this.coursesWithTN = [];
