@@ -99,6 +99,20 @@ export class HomeComponent implements OnInit {
             ();
     }
 
+    registerCourse(courseName: string) {
+        this.courseService
+            .register(courseName)
+            .subscribe
+            //     curDto => {
+            //     if (!curDto) {
+            //         this.coursesWithTN = [];
+            //     } else {
+            //         this.coursesWithTN = curDto;
+            //     }
+            // }
+            ();
+    }
+
     // deleteUser(user: User) {
     //     const modalRef = this.modalService.open(UserMgmtDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     //     modalRef.componentInstance.user = user;

@@ -34,7 +34,7 @@
                     <div>{{course.courseLocation}}</div>
                     <div>{{course.courseContent}}</div>
                     <div>{{course.teacherId}}</div>
-                    <button *jhiHasAnyAuthority="'ROLE_STUDENT'">注册课程</button>
+                    <button *jhiHasAnyAuthority="'ROLE_STUDENT'" (click)="registerCourse(course.courseName)">注册课程</button>
                     <button *jhiHasAnyAuthority="'ROLE_TEACHER'" (click)="deleteCourse(course.courseName)">删除课程</button>
                  </div>
             </div>
