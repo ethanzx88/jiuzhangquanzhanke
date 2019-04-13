@@ -45,7 +45,7 @@ public class CourseController {
     }
 
     @PostMapping(path = "/api/course/registerCourse/{courseName}", produces = "application/json")
-    public HttpStatus registerCourse(@PathVariable String courseName) {
+    public HttpStatus registerCourse(@NotNull @PathVariable("courseName") String courseName) {
         try {
             courseService.registerCourse(courseName);
             return HttpStatus.OK;

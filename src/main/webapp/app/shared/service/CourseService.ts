@@ -12,7 +12,7 @@ export class CourseService {
     private courseDeleteUrl = SERVER_API_URL + 'api/course/deleteCourse';
     private courseUpdateUrl = SERVER_API_URL + 'api/course/updateCourse';
     private addCourseUrl = SERVER_API_URL + 'api/course/addCourse';
-    private registerCourseUrl = SERVER_API_URL + 'api/course/regesterCourse';
+    private registerCourseUrl = SERVER_API_URL + 'api/course/registerCourse';
 
     constructor(private http: HttpClient) {}
 
