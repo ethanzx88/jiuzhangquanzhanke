@@ -85,6 +85,32 @@ export class HomeComponent implements OnInit {
         });
     }
 
+    deleteCourse(courseName: string) {
+        this.courseService
+            .delete(courseName)
+            .subscribe
+            //     curDto => {
+            //     if (!curDto) {
+            //         this.coursesWithTN = [];
+            //     } else {
+            //         this.coursesWithTN = curDto;
+            //     }
+            // }
+            ();
+    }
+
+    // deleteUser(user: User) {
+    //     const modalRef = this.modalService.open(UserMgmtDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    //     modalRef.componentInstance.user = user;
+    //     modalRef.result.then(
+    //         result => {
+    //             // Left blank intentionally, nothing to do here
+    //         },
+    //         reason => {
+    //             // Left blank intentionally, nothing to do here
+    //         }
+    //     );
+    // }
     // registerCourse(courseName) {
     //
     // }
@@ -103,7 +129,7 @@ export class HomeComponent implements OnInit {
             // this.coursesWithTN = [];
             // this.course2save.courseName = "ets";
             // this.
-            this.courseService.update(this.course2save).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+            this.courseService.create(this.course2save).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
         } else {
             // this.coursesWithTN = [];
             // this.coursesWithTN = [];
