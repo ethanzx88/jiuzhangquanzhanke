@@ -9,8 +9,9 @@ import javax.persistence.Cacheable;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface UserCourseRepository extends JpaRepository<UserCourse, Long>{
 
-    Optional<UserCourse> findUserCourse(long course_id, long user_id);
+    Optional<UserCourse> findUserCourse(Long course_id, Long user_id);
 
 }
