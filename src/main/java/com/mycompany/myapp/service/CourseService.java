@@ -10,6 +10,7 @@ import com.mycompany.myapp.repository.CourseRepository;
 import com.mycompany.myapp.repository.UserCourseRepository;
 import org.checkerframework.checker.units.qual.A;
 import org.checkerframework.checker.units.qual.C;
+import org.mapstruct.ap.shaded.freemarker.debug.Debugger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -75,13 +76,22 @@ public class CourseService {
         Optional<User> curUser = userService.getUserWithAuthorities();
         Optional<Course> curCourse = courseRepository.findCourseByCourseName(courseName);
 
-        if (curUser.isPresent() && curCourse.isPresent()){
-            userCourseRepository.delete(UserCourse.builder()
-                .user(curUser.get())
-                .course(curCourse.get())
-                .build());
-        } else {
-            throw new Exception("UnExpected Exception");
+        // System.out.println(curUser.get().id);
+// write a function to get user ID
+// write a function to get course ID
+
+        Optional<UserCourse> OptionalExistingUserCourse = userCourseRepository.findUserCourse(curUser.get().id,curCourse.get().id);
+       
+        // Optional<UserCourse> OptionalExistingUserCourse = userCourseRepository.findUserCourse(curCourse.course_id,curUser.user_id);
+
+
+         if(!OptionalExistingUserCourse.isPresent()){
+            throw new Exception("Course is not exist.");
+        }
+        try {
+            userCourseRepository.delete(OptionalExistingUserCourse.get());
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
         }
     }
     
@@ -106,7 +116,7 @@ public class CourseService {
         }
 
     }
-
+    
     public void deleteCourse(String courseName) throws Exception{
         Optional<Course> OptionalExistingCourse = courseRepository.findCourseByCourseName(courseName);
 
