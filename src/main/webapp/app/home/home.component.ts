@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { LoginModalService, Principal, Account } from 'app/core';
 import { CourseService } from 'app/shared/service/CourseService';
-import { CourseDto } from 'app/shared/model/course-dto.model';
+import { Course, CourseDto } from 'app/shared/model/course-dto.model';
 import { CourseWithTNDto } from 'app/shared/model/courseWithTN-dto.model';
 
 @Component({
@@ -16,12 +18,20 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
     classeNameNeedToReg: string;
+    isSaving: boolean;
+    course2save: Course = {
+        courseName: null,
+        courseLocation: null,
+        courseContent: null,
+        courseTeacher: null
+    };
 
     constructor(
         private principal: Principal,
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager,
-        private courseService: CourseService
+        private courseService: CourseService,
+        private route: ActivatedRoute
     ) {}
 
     courses: CourseDto[] = [];
@@ -29,10 +39,14 @@ export class HomeComponent implements OnInit {
     coursesWithTN: CourseWithTNDto[] = [];
 
     ngOnInit() {
+        this.isSaving = false;
         this.principal.identity().then(account => {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+        // this.route.data.subscribe(({ course2save }) => {
+        //     this.course2save = course2save.body ? course2save.body : course2save;
+        // });
     }
 
     registerAuthenticationSuccess() {
@@ -77,5 +91,32 @@ export class HomeComponent implements OnInit {
 
     clearAllCourses() {
         this.courses = [];
+    }
+    clearAllCoursesTN() {
+        this.coursesWithTN = [];
+    }
+    saveCourse() {
+        this.isSaving = true;
+        // this.coursesWithTN = [];
+
+        if (this.course2save.courseName !== null) {
+            // this.coursesWithTN = [];
+            // this.course2save.courseName = "ets";
+            // this.
+            this.courseService.update(this.course2save).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+        } else {
+            // this.coursesWithTN = [];
+            // this.coursesWithTN = [];
+            // this.user.langKey = 'en';
+            // this.userService.create(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+        }
+    }
+
+    private onSaveSuccess(result) {
+        this.isSaving = false;
+    }
+
+    private onSaveError() {
+        this.isSaving = false;
     }
 }

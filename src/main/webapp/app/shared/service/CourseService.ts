@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CourseDto } from 'app/shared/model/course-dto.model';
+import { Course, CourseDto } from 'app/shared/model/course-dto.model';
 import { SERVER_API_URL } from 'app/app.constants';
 import { CourseWithTNDto } from 'app/shared/model/courseWithTN-dto.model';
 
@@ -26,7 +26,7 @@ export class CourseService {
         return this.http.delete<Response>(`${this.courseDeleteUrl}/${courseName}`);
     }
 
-    update(course: CourseDto): Observable<Response> {
+    update(course: Course): Observable<Response> {
         return this.http.put<Response>(this.courseUpdateUrl, course);
     }
 }
